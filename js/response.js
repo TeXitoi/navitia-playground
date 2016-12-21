@@ -149,7 +149,7 @@ response.Context = function(data) {
             if (! link.templated) { return; }
             if (link.type === 'related') { return; }
             if (! link.href.match(templateRegex)) { return; }
-            self.links[utils.getType(link.type)] = link.href;
+            self.links[utils.getType(link.type)] = { href: link.href, rel: link.rel };
         });
     }
 
@@ -167,8 +167,14 @@ response.Context = function(data) {
         if (! (key in this.links) || ! ('id' in obj)) {
             return $('<span/>').html(name);
         }
-        var href = this.links[key].replace(templateRegex, obj.id);
-        return $('<a>').attr('href', this.makeHref(href)).html(name);
+        var href = this.links[key].href.replace(templateRegex, obj.id);
+        var res = $('<span/>')
+            .append($('<a>').attr('href', this.makeHref(href)).html(name));
+        var self = this;
+        $('<span/>').text('+').click(function() {
+            $('#addPathElt').before(request.makeKeyValue(self.links[key].rel, obj.id, 'path'));
+        }).appendTo(res);
+        return res;
     };
 
     var minDurationColor = {};
