@@ -131,3 +131,32 @@ pictos.makeEquipmentPicto = function(equipment) {
     }
     return pictos.makeImg(img, equipment);
 };
+
+pictos.makeOccupancyPicto = function(occupancy) {
+    var img = 'OccupancyMedium';
+    var message = 'Unknown';
+    if (occupancy === 'empty') {
+        img = 'OccupancyLow';
+        message = 'Empty';
+    } else if (occupancy === 'many_seats_available') {
+        img = 'OccupancyLow';
+        message = 'Many seats available';
+    } else if (occupancy === 'few_seats_available') {
+        img = 'OccupancyMedium';
+        message = 'Few seats available';
+    } else if (occupancy === 'standing_room_only') {
+        img = 'OccupancyMedium';
+        message = 'Standing room only';
+    } else if (occupancy === 'crushed_standing_room_only') {
+        img = 'OccupancyHigh';
+        message = 'Crushed standing room only';
+    } else if (occupancy === 'full') {
+        img = 'OccupancyHigh';
+        message = 'Full';
+    } else if (occupancy === 'not_accepting_passengers') {
+        img = 'OccupancyHigh';
+        message = 'Not accepting passengers';
+    }
+    return pictos.makeImg(img, message);
+};
+
