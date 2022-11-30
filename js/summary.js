@@ -412,7 +412,7 @@ summary.make.line = function(context, line) {
 
 summary.make.stop_date_time = function(context, stop_time) {
     var sum = summary.run(context, 'stop_point', stop_time.stop_point);
-    var occupancy = $('')
+    var occupancy = $('');
     if (stop_time.departure_occupancy) {
         occupancy = $('<span>')
             .append(' ')
