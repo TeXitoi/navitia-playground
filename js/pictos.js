@@ -34,45 +34,37 @@ pictos.makePtPicto = function(json) {
     if (!(json instanceof Object) || !('id' in json)) {
         return $('<span/>');
     }
-    var img = 'Unknown';
-    switch (json.id) {
-    case 'physical_mode:Air': img = 'Air'; break;
-    case 'physical_mode:Bike': img = 'Bike'; break;
-    case 'physical_mode:BikeSharingService': img = 'BikeSharingService'; break;
-    case 'physical_mode:Car': img = 'Car'; break;
-    case 'physical_mode:Coach': img = 'Coach'; break;
-    case 'physical_mode:Metro': img = 'Metro'; break;
-    case 'physical_mode:Taxi': img = 'Taxi'; break;
-    case 'physical_mode:Tramway': img = 'Tramway'; break;
-    case 'physical_mode:Walking': img = 'Walking'; break;
-    case 'physical_mode:CheckIn': img = 'CheckIn'; break;
-    case 'physical_mode:CheckOut': img = 'CheckOut'; break;
-    case 'physical_mode:Shuttle': img = 'Shuttle'; break;
+    var physical_mode_img = {
+        'physical_mode:Air': 'Air',
+        'physical_mode:Bike': 'Bike',
+        'physical_mode:BikeSharingService': 'BikeSharingService',
+        'physical_mode:Car': 'Car',
+        'physical_mode:Coach': 'Coach',
+        'physical_mode:Metro': 'Metro',
+        'physical_mode:Taxi': 'Taxi',
+        'physical_mode:Tramway': 'Tramway',
+        'physical_mode:Walking': 'Walking',
+        'physical_mode:CheckIn': 'CheckIn',
+        'physical_mode:CheckOut': 'CheckOut',
+        'physical_mode:Shuttle': 'Shuttle',
 
-    case 'physical_mode:Funicular':
-    case 'physical_mode:SuspendedCableCar':
-        img = 'Funicular'; break;
+        'physical_mode:Funicular': 'Funicular',
+        'physical_mode:SuspendedCableCar': 'Funicular',
 
-    case 'physical_mode:Bus':
-    case 'physical_mode:BusRapidTransit':
-    case 'physical_mode:Trolleybus':
-        img = 'Bus'; break;
+        'physical_mode:Bus': 'Bus',
+        'physical_mode:BusRapidTransit': 'Bus',
+        'physical_mode:Trolleybus': 'Bus',
 
-    case 'physical_mode:RapidTransit':
-    case 'physical_mode:LocalTrain':
-    case 'physical_mode:LongDistanceTrain':
-    case 'physical_mode:Train':
-    case 'physical_mode:RailShuttle':
-        img = 'Train'; break;
+        'physical_mode:RapidTransit': 'Train',
+        'physical_mode:LocalTrain': 'Train',
+        'physical_mode:LongDistanceTrain': 'Train',
+        'physical_mode:Train': 'Train',
+        'physical_mode:RailShuttle': 'Train',
 
-    case 'physical_mode:Boat':
-    case 'physical_mode:Ferry':
-        img = 'Boat'; break;
-
-    default:
-        break;
-    }
-
+        'physical_mode:Boat': 'Boat',
+        'physical_mode:Ferry': 'Boat',
+    };
+    var img = physical_mode_img[json.id] || 'Unknown';
     return pictos.makeImg(img, json.name);
 };
 
@@ -89,45 +81,54 @@ pictos.makeImgFromUrl = function(img, name) {
 };
 
 pictos.makeSnPicto = function(mode) {
-    var img = 'Unknown';
-    if (mode === 'walking') {
-        img = 'Walking';
-    } else if (mode === 'bike') {
-        img = 'Bike';
-    } else if (mode.indexOf('bss') === 0) {
-        img = 'BikeSharingService';
-    } else if (mode === 'car' || mode === 'carnopark' || mode === 'park' || mode === 'leave_parking') {
-        img = 'Car';
-    } else if (mode === 'ridesharing') {
-        img = 'RideSharing';
-    } else if (mode === 'taxi') {
-        img = 'Taxi';
-    } else if (mode === 'entrance') {
-        img = 'Entrance';
-    } else if (mode === 'exit') {
-        img = 'Exit';
-    }
+    var mode_img = {
+        'walking': 'Walking',
+        'bike': 'Bike',
+        'bss': 'BikeSharingService',
+        'car' : 'Car',
+        'carnopark': 'Car',
+        'park': 'Car',
+        'leave_parking': 'Car',
+        'ridesharing': 'RideSharing',
+        'taxi': 'Taxi',
+        'entrance': 'Entrance',
+        'exit': 'Exit',
+    };
+    var img = mode_img[mode] || 'Unknown';
     return pictos.makeImg(img, mode);
 };
 
 pictos.makeEquipmentPicto = function(equipment) {
-    var img = 'Unknown';
-    switch (equipment) {
-    case 'has_wheelchair_accessibility':
-    case 'has_wheelchair_boarding':
-        img = 'Wheelchair'; break;
-    case 'has_bike_accepted':
-    case 'has_bike_depot':
-        img = 'BikeAccepted'; break;
-    case 'has_air_conditioned': img = 'AirConditioning'; break;
-    case 'has_visual_announcement': img = 'HearingImpairment'; break;
-    case 'has_audible_announcement': img = 'VisualImpairment'; break;
-    case 'has_appropriate_escort': img = ''; break;
-    case 'has_appropriate_signage': img = 'MentalDisorder'; break;
-    case 'has_school_vehicle': img = 'SchoolBus'; break;
-    case 'has_elevator': img = 'Elevator'; break;
-    case 'has_escalator': img = 'Escalator'; break;
-    case 'has_sheltered': img = 'Shelter'; break;
-    }
+    var equipment_img = {
+        'has_wheelchair_accessibility': 'Wheelchair',
+        'has_wheelchair_boarding': 'Wheelchair',
+        'has_bike_accepted': 'BikeAccepted',
+        'has_bike_depot': 'BikeAccepted',
+        'has_air_conditioned': 'AirConditioning',
+        'has_visual_announcement': 'HearingImpairment',
+        'has_audible_announcement': 'VisualImpairment',
+        'has_appropriate_escort': 'Unknown',
+        'has_appropriate_signage': 'MentalDisorder',
+        'has_school_vehicle': 'SchoolBus',
+        'has_elevator': 'Elevator',
+        'has_escalator': 'Escalator',
+        'has_sheltered': 'Shelter',
+    };
+    var img = equipment_img[equipment] || 'Unknown';
     return pictos.makeImg(img, equipment);
 };
+
+pictos.makeOccupancyPicto = function(occupancy) {
+    var occupancy_img = {
+        'empty': 'OccupancyLow',
+        'many_seats_available': 'OccupancyLow',
+        'few_seats_available': 'OccupancyMedium',
+        'standing_room_only': 'OccupancyMedium',
+        'crushed_standing_room_only': 'OccupancyHigh',
+        'full': 'OccupancyHigh',
+        'not_accepting_passengers': 'OccupancyHigh',
+    };
+    var img = occupancy_img[occupancy] || 'Unknown';
+    return pictos.makeImg(img, occupancy);
+};
+
