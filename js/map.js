@@ -525,7 +525,7 @@ map._makeMarkerForAccessPoint = function(context, sp) {
         style2.opacity = 10;
         style2.dashArray =  '0, 12';
 
-        var from = ap.coord;
+        var from = ap.access_point.coord;
         var to = sp.coord;
 
         return marker.concat([
