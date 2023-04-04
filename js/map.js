@@ -512,8 +512,7 @@ map._makeMarkerForChildren = function(context, poi) {
         return [];
     }
     var bind = function(ap) {
-        return map._makeMarker(context, 'chlid', ap);
-
+        return map._makeMarker(context, 'child', ap);
     };
     return utils.flatMap(poi.children, bind);
 };
