@@ -538,6 +538,12 @@ summary.make.car_park = function(context, json) {
     }).join(', ');
 };
 
+summary.make.child = function(context, json) {
+    var res = $('<span/>');
+    res.append(json.name);
+    return res;
+};
+
 summary.make.disruption = function(context, json) {
     var res = $('<span/>');
     res.append($('<span/>').css('color', json.severity.color).text(json.severity.name));
