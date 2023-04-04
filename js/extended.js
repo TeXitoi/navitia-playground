@@ -232,6 +232,11 @@ extended.make.poi = function(context, json) {
     if (json.car_park) {
         result.append(response.render(context, json.car_park, 'car_park', 'car_park'));
     }
+    if (json.children) {
+        json.children.forEach(function(children, i) {
+            result.append(response.render(context, children, 'child', 'children', i));
+        });
+    }
     return result;
 };
 

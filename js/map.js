@@ -168,7 +168,10 @@ map.makeFeatures = {
         return map.getFeatures(context, json.embedded_type, json[json.embedded_type]);
     },
     poi: function(context, json) {
-        return map._makeMarker(context, 'poi', json);
+        return map._makeMarker(context, 'poi', json).concat(map._makeMarkerForChildren(context, json));
+    },
+    child: function(context, json) {
+        return map._makeMarker(context, 'child', json);
     },
     free_floating: function(context, json) {
         return map._makeMarker(context, 'free_floating', json);
@@ -502,6 +505,16 @@ map.run = function(context, type, json) {
         div_nomap.append('No map');
         return div_nomap;
     }
+};
+
+map._makeMarkerForChildren = function(context, poi) {
+    if (! poi.children){
+        return [];
+    }
+    var bind = function(ap) {
+        return map._makeMarker(context, 'child', ap);
+    };
+    return utils.flatMap(poi.children, bind);
 };
 
 map._makeMarkerForAccessPoint = function(context, sp) {
