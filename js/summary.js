@@ -158,6 +158,9 @@ summary.make.journey = function(context, json) {
             .appendTo(res);
     }
 
+    if (json.low_emission_zone ){
+        res.append(summary.makeLEZPicto(json));
+    }
     return res;
 };
 
@@ -371,6 +374,10 @@ summary.make.section = function(context, section) {
         if (infos.network && infos.operator) {
             res.append(utils.htmlEncode(sprintf(', network: %s, operator: %s', infos.network, infos.operator)));
         }
+    }
+
+    if (section.low_emission_zone ){
+        res.append(summary.makeLEZPicto(section));
     }
     return res;
 };
@@ -1083,6 +1090,17 @@ summary.makeVehicleJourneyPosition = function(context, json) {
         res.append(' > Occupancy: ');
         res.append(json.occupancy);
     }
+    return res;
+};
+
+summary.makeLEZPicto = function(json) {
+    var res = $('<span>');
+    var lez_picto = 'img/pictos/NoLEZ.png';
+    if (json.low_emission_zone.on_path) {
+        lez_picto = 'img/pictos/LEZ.png';
+    }
+    res.addClass('section-additional-block')
+        .append($('<img>').addClass('picto').attr('src', lez_picto));
     return res;
 };
 
