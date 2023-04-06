@@ -1096,11 +1096,15 @@ summary.makeVehicleJourneyPosition = function(context, json) {
 summary.makeLEZPicto = function(json) {
     var res = $('<span>');
     var lez_picto = 'img/pictos/NoLEZ.png';
+    var tag = 'No Low Emission Zone On Path';
     if (json.low_emission_zone.on_path) {
         lez_picto = 'img/pictos/LEZ.png';
+        tag = 'Low Emission Zone On Path';
     }
     res.addClass('section-additional-block')
-        .append($('<img>').addClass('picto').attr('src', lez_picto));
+        .append($('<img>').addClass('picto')
+            .attr('src', lez_picto)
+            .attr('title', tag));
     return res;
 };
 
