@@ -1102,7 +1102,8 @@ summary.makeLEZPicto = function(json) {
     res.addClass('section-additional-block')
         .append($('<img>').addClass('picto').attr('src', lez_picto));
     return res;
-}
+};
+
 summary.run = function(context, type, json) {
     var res;
     try {
