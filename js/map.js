@@ -650,12 +650,14 @@ map._makeStringViaToPt = function(context, type, json, style) {
 
     // At the moment, we have only one via in PathItem
     if (json.path[json.path.length - 1].via_uri){
-        from = json.vias[0].access_point.coord;
+        var via_from = json.vias.find(function(element) { return element.id === json.path[json.path.length - 1].via_uri; });
+        from = via_from.access_point.coord;
         to = map._getCoordFromPlace(json.to);
     }
     if (json.path[0].via_uri){
         from = map._getCoordFromPlace(json.from);
-        to = json.vias[0].access_point.coord;
+        var via_to = json.vias.find(function(element) { return element.id === json.path[0].via_uri; });
+        to = via_to.access_point.coord;
     }
 
     var style1 = utils.deepClone(style);
