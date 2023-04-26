@@ -940,9 +940,6 @@ summary.make.via = function(context, ap) {
 
 summary.make.best_boarding_positions = function(context, json) {
     var res = $('<div/>');
-    res.append('[');
-    res.append(json.join(', '));
-    res.append(']');
     res.append(summary.makeBoradingPositionPicto(json));
     return res;
 };
