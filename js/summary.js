@@ -1119,23 +1119,16 @@ summary.makeLEZPicto = function(json) {
 summary.makeBoradingPositionPicto = function(json) {
     var res = $('<span>');
 
-    var positions = [];
-    var front = 'front';
-    var middle = 'middle';
-    var back = 'back';
-    if (json.includes(front)) {
-        positions.push(front);
-    }
-    if (json.includes(middle)) {
-        positions.push(middle);
-    }
-    if (json.includes(back)) {
-        positions.push(back);
-    }
+    var ordered_positions = [];
+    ['front', 'middle', 'back'].forEach(function (element) {
+        if (json.includes(element)) {
+            ordered_positions.push(element);
+        }
+    });
 
-    var picto = sprintf('img/pictos/Boarding_%s.png', positions.join('_'));
+    var picto = sprintf('img/pictos/Boarding_%s.png', ordered_positions.join('_'));
 
-    var tag = sprintf('Best boarding position: %s', positions.join(' '));
+    var tag = sprintf('Best boarding position: %s', ordered_positions.join(' '));
 
     res.addClass('section-additional-block')
         .append($('<img>').addClass('picto')
