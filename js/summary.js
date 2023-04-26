@@ -379,6 +379,9 @@ summary.make.section = function(context, section) {
     if (section.low_emission_zone ){
         res.append(summary.makeLEZPicto(section));
     }
+    if (section.best_boarding_positions ){
+        res.append(summary.makeBoradingPositionPicto(section.best_boarding_positions));
+    }
     return res;
 };
 
@@ -935,6 +938,14 @@ summary.make.via = function(context, ap) {
     return res;
 };
 
+summary.make.best_boarding_positions = function(context, json) {
+    var res = $('<div/>');
+    res.append('[');
+    res.append(json.join(', '));
+    res.append(']');
+    res.append(summary.makeBoradingPositionPicto(json));
+    return res;
+};
 
 // add your summary view by adding:
 //   summary.make.{type} = function(context, json) { ... }
@@ -1104,6 +1115,34 @@ summary.makeLEZPicto = function(json) {
     res.addClass('section-additional-block')
         .append($('<img>').addClass('picto')
             .attr('src', lez_picto)
+            .attr('title', tag));
+    return res;
+};
+
+summary.makeBoradingPositionPicto = function(json) {
+    var res = $('<span>');
+
+    var positions = [];
+    var front = 'front';
+    var middle = 'middle';
+    var back = 'back';
+    if (json.includes(front)) {
+        positions.push(front);
+    }
+    if (json.includes(middle)) {
+        positions.push(middle);
+    }
+    if (json.includes(back)) {
+        positions.push(back);
+    }
+
+    var picto = sprintf('img/pictos/Boarding_%s.png', positions.join('_'));
+
+    var tag = sprintf('Best boarding position: %s', positions.join(' '));
+
+    res.addClass('section-additional-block')
+        .append($('<img>').addClass('picto')
+            .attr('src', picto)
             .attr('title', tag));
     return res;
 };
