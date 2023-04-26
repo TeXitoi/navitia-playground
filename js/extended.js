@@ -141,6 +141,9 @@ extended.make.section = function(context, json) {
     if (json.to) {
         result.append(response.render(context, json.to, 'place', 'to'));
     }
+    if (json.best_boarding_positions) {
+        result.append(response.render(context, json.best_boarding_positions, 'best_boarding_positions', 'best_boarding_positions'));
+    }
     if (json.path) {
         result.append(response.render(context, json, 'path', 'paths'));
     }
