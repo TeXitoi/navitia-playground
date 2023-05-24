@@ -161,6 +161,12 @@ summary.make.journey = function(context, json) {
     if (json.low_emission_zone ){
         res.append(summary.makeLEZPicto(json));
     }
+    if ('tags' in json) {
+        if (json.tags.includes('olympics')) {
+            res.append(summary.makeOlympicsPicto(json));
+        }
+    }
+    
     return res;
 };
 
@@ -1112,6 +1118,17 @@ summary.makeLEZPicto = function(json) {
     res.addClass('section-additional-block')
         .append($('<img>').addClass('picto')
             .attr('src', lez_picto)
+            .attr('title', tag));
+    return res;
+};
+
+summary.makeOlympicsPicto = function(json) {
+    var res = $('<span>');
+    var picto = 'img/pictos/olympics.png';
+    var tag = 'Olympics';
+    res.addClass('section-additional-block')
+        .append($('<img>').addClass('picto')
+            .attr('src', picto)
             .attr('title', tag));
     return res;
 };
