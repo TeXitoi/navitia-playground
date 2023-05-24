@@ -163,7 +163,7 @@ summary.make.journey = function(context, json) {
     }
     if ('tags' in json) {
         if (json.tags.includes('olympics')) {
-            res.append(summary.makeOlympicsPicto(json));
+            res.append(summary.makeOlympicsPicto());
         }
     }
     
@@ -1122,7 +1122,7 @@ summary.makeLEZPicto = function(json) {
     return res;
 };
 
-summary.makeOlympicsPicto = function(json) {
+summary.makeOlympicsPicto = function() {
     var res = $('<span>');
     var picto = 'img/pictos/olympics.png';
     var tag = 'Olympics';
