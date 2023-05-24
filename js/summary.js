@@ -161,7 +161,7 @@ summary.make.journey = function(context, json) {
     if (json.low_emission_zone ){
         res.append(summary.makeLEZPicto(json));
     }
-    if ('tags' in json) {
+    if (json.tags) {
         if (json.tags.includes('olympics')) {
             res.append(summary.makeOlympicsPicto());
         }
